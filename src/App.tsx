@@ -5,8 +5,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import configureStore from './app/state/store';
 import Routes from './app/routes';
 
-// import 'react-day-picker/lib/style.css';
-// import './app/assets/css/global.css';
+import 'antd/dist/antd.css';
 
 class App extends Component<{}, {}> {
   render() {
@@ -22,5 +21,6 @@ class App extends Component<{}, {}> {
     );
   }
 }
+
 
 export default App;

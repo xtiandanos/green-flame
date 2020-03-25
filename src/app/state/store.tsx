@@ -20,7 +20,6 @@ export default function configureStore(): any {
   const store: any = createStore(
     persistedReducer,
     compose(
-      //@ts-ignore
       applyMiddleware(sagaMiddleware, createLogger(true)),
       process.env.REACT_APP_ENV !== 'production'
         ? (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
