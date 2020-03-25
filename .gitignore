@@ -1,0 +1,37 @@
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
+# dependencies
+node_modules
+
+# testing
+coverage
+
+# production
+build
+www
+platforms
+plugins
+
+# misc
+.DS_Store
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+git.log.csv
+
+#config
+config/*
+
+#env
+.env
+.env*
+/.project
+.idea
+.idea/*
+.vscode
+misc.xml
+modules.xml
+vcs.xml
+workspace.xml
+config.xml
+__script.js
