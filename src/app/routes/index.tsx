@@ -1,26 +1,25 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import Loadable from 'react-loadable';
+import PublicRoutes from './public';
 
-function Loading() {
-  return <div>Loading...</div>;
+function RouteWithSubRoutes(route: any) {
+  return (
+    <Route
+      path={route.path}
+      render={props => (
+        // pass the sub-routes down to keep nesting
+        <route.component {...props} routes={route.routes} />
+      )}
+    />
+  );
 }
-
-const HomePageLoader = Loadable({
-  loader: () => import('../views/pages/public/home'),
-  loading: Loading,
-});
-
-const CartPageLoader = Loadable({
-  loader: () => import('../views/pages/public/cart'),
-  loading: Loading,
-});
 
 const Routes = () => (
   <Switch>
-    <Route exact path="/welcome" component={HomePageLoader} />
-    <Route exact path="/cart" component={CartPageLoader} />
+    {
+      PublicRoutes.map((route: any, i: number) => <RouteWithSubRoutes key={i} {...route} />)
+    }
   </Switch>
 );
 
