@@ -1,19 +1,18 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Row, Col, Card } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
 
 import { productOperations, productSelectors } from '../../../state/ducks/product';
+import { cartOperations, cartSelectors } from '../../../state/ducks/cart';
 import { getProducts } from '../../../state/ducks/product/selectors';
+import * as ProductTypes from '../../../state/ducks/product/actions-types'
 
-type productItem = {
-  name: string;
-  description: string;
-  price: number;
-}
 
 type localProps = {
-  products: Array<productItem>;
+  products: Array<ProductTypes.ProductItem>;
   fetchProducts: () => void;
+  addToCart: (data: ProductTypes.ProductItem) => void;
 }
 
 const HomePage = (props: localProps) => {
@@ -22,18 +21,26 @@ const HomePage = (props: localProps) => {
     props.fetchProducts();
   }, []);
 
-  const displayProduct = (products: Array<productItem>) => {
+  const addToCart = (item: ProductTypes.ProductItem) => {
+    props.addToCart(item);
+  }
+
+  const displayProduct = (products: Array<ProductTypes.ProductItem>) => {
+
 
     return (
       <Row gutter={16}>
         {
-          products.map((item: productItem, index: number) => {
+          products.map((item: ProductTypes.ProductItem, index: number) => {
             return (
               <Col key={index} className="gutter-row" span={8}>
                 <Card>
                   <p>name: {item.name}</p>
                   <p>description: {item.description}</p>
-                  <p>price: {item.price}</p>
+                  <p>price: {`${process.env.CURRENCY_SYMBOL} ${item.price}`}</p>
+                  <div onClick={(e: any) => addToCart(item)}>
+                    <PlusOutlined />
+                  </div>
                 </Card>
               </Col>
             )
@@ -54,9 +61,11 @@ const HomePage = (props: localProps) => {
 
 export default connect(
   state => ({
-    products: productSelectors.getProducts(state)
+    products: productSelectors.getProducts(state),
+    cartProducts: cartSelectors.getProducts(state),
   }),
   {
-    fetchProducts: productOperations.fetchProducts
+    fetchProducts: productOperations.fetchProducts,
+    addToCart: cartOperations.addProductToCart
   }
 )(HomePage);
