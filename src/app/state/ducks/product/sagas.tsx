@@ -1,4 +1,4 @@
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, takeEvery } from 'redux-saga/effects';
 import * as types from './actions-types';
 
 function* getProductsList(action: any) {
@@ -48,6 +48,6 @@ function* getProductsList(action: any) {
   }
 }
 
-export function getProductsListRequest() {
-  takeLatest(types.GET_PRODUCT_LIST_REQUEST, getProductsList);
+export function* getProductsListRequest() {
+  yield takeEvery(types.GET_PRODUCT_LIST_REQUEST, getProductsList);
 }

@@ -1,14 +1,62 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { Row, Col, Card } from 'antd';
 
-class HomePage extends Component<{}, {}> {
+import { productOperations, productSelectors } from '../../../state/ducks/product';
+import { getProducts } from '../../../state/ducks/product/selectors';
 
-  render() {
+type productItem = {
+  name: string;
+  description: string;
+  price: number;
+}
+
+type localProps = {
+  products: Array<productItem>;
+  fetchProducts: () => void;
+}
+
+const HomePage = (props: localProps) => {
+
+  useEffect(() => {
+    props.fetchProducts();
+  }, []);
+
+  const displayProduct = (products: Array<productItem>) => {
 
     return (
-      <h1>This is the Home Page</h1>
-    );
-  }
+      <Row gutter={16}>
+        {
+          products.map((item: productItem, index: number) => {
+            return (
+              <Col key={index} className="gutter-row" span={8}>
+                <Card>
+                  <p>name: {item.name}</p>
+                  <p>description: {item.description}</p>
+                  <p>price: {item.price}</p>
+                </Card>
+              </Col>
+            )
+          })
+        }
+      </Row>
+    )
+  };
+
+  return (
+    <div>
+      {props.products && displayProduct(props.products)}
+    </div>
+  )
+
 
 }
 
-export default HomePage;
+export default connect(
+  state => ({
+    products: productSelectors.getProducts(state)
+  }),
+  {
+    fetchProducts: productOperations.fetchProducts
+  }
+)(HomePage);

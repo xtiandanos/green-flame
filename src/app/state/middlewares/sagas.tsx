@@ -4,6 +4,6 @@ import { productSagas } from '../ducks/product'
 
 export default function* rootSaga() {
   yield all([
-    productSagas.getProductsListRequest()
+    productSagas.getProductsListRequest(),
   ]);
 }

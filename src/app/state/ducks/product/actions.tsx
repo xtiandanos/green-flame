@@ -1,5 +1,5 @@
 import * as types from './actions-types';
 
-export const fetProducts = () => ({
+export const fetchProducts = () => ({
   type: types.GET_PRODUCT_LIST_REQUEST
 })
