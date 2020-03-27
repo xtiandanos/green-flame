@@ -4,8 +4,7 @@ import { Row, Col, Card } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 
 import { productOperations, productSelectors } from '../../../state/ducks/product';
-import { cartOperations, cartSelectors } from '../../../state/ducks/cart';
-import { getProducts } from '../../../state/ducks/product/selectors';
+import { cartOperations } from '../../../state/ducks/cart';
 import * as ProductTypes from '../../../state/ducks/product/actions-types'
 
 
@@ -62,7 +61,6 @@ const HomePage = (props: localProps) => {
 export default connect(
   state => ({
     products: productSelectors.getProducts(state),
-    cartProducts: cartSelectors.getProducts(state),
   }),
   {
     fetchProducts: productOperations.fetchProducts,
