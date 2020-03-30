@@ -11,6 +11,15 @@ const data = createReducer([])({
 
     return oldData;
   },
+  [types.DELETE_PRODUCT_IN_CART]: (state: any, actions: any) => {
+    console.log(state, 'here i am')
+
+    let filtered = state.filter((elem: any) => {
+      return elem != actions.payload;
+    });
+
+    return filtered;
+  }
 });
 
 export default combineReducers({

@@ -1,6 +1,7 @@
-import { getProductsInCart, addProductToCart } from './actions';
+import { getProductsInCart, addProductToCart, deleteProductInCart } from './actions';
 
 export {
   getProductsInCart,
-  addProductToCart
+  addProductToCart,
+  deleteProductInCart
 }

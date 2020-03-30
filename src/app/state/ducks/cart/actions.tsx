@@ -8,4 +8,9 @@ export const getProductsInCart = () => ({
 export const addProductToCart = (data: productTypes.ProductItem) => ({
   type: cartTypes.ADD_PRODUCT_TO_CART,
   payload: data
-})
+});
+
+export const deleteProductInCart = (data: productTypes.ProductItem) => ({
+  type: cartTypes.DELETE_PRODUCT_IN_CART,
+  payload: data
+});
